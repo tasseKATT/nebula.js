@@ -313,12 +313,8 @@ const Cell = forwardRef(({ halo, model, initialSnOptions, initialError, onMount 
       /*        let c = { ...halo.context };
         c.accessibility = {focus: false};
         root.context(c)*/
-
-      const acc =
-        state.sn && state.sn.component && state.sn.component.__hooks && state.sn.component.__hooks.accessibility;
-      if (acc && acc.setter) {
-        acc.setter({ focus: true });
-      }
+      // model.id is not unique
+      halo.root.toggleFocus(model.id);
 
       // This works, but isn't good
       //state.sn.component.render({ context: {accessibility: { focus: true }}});
@@ -398,6 +394,11 @@ const Cell = forwardRef(({ halo, model, initialSnOptions, initialError, onMount 
     () => ({
       getQae() {
         return state.sn.generator.qae;
+      },
+      toggleFocus(inFocus) {
+        if (typeof state.sn.component.toggleFocus === 'function') {
+          state.sn.component.toggleFocus(inFocus);
+        }
       },
       setSnOptions,
       async takeSnapshot() {

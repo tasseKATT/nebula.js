@@ -232,7 +232,7 @@ function nuked(configuration = {}) {
       context: async (ctx) => {
         // filter valid values to avoid triggering unnecessary rerender
         let changes;
-        ['theme', 'language', 'constraints'].forEach((key) => {
+        ['theme', 'language', 'constraints', 'accessibility'].forEach((key) => {
           if (ctx[key] && ctx[key] !== currentContext[key]) {
             if (!changes) {
               changes = {};

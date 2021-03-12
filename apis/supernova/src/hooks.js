@@ -235,6 +235,7 @@ export function hook(cb) {
     run,
     teardown,
     runSnaps,
+    toggleFocus,
     observeActions,
     getImperativeHandle,
     updateRectOnNextRun,
@@ -934,10 +935,17 @@ export function useAccessibility() {
   const [acc, setAcc] = useState(accessibility);
 
   currentComponent.__hooks.accessibility.setter = setAcc;
-  /* useEffect(() => {
+  useEffect(() => {
     console.log('acc hook: ' + accessibility.focus);
     setAcc(accessibility);
-  }, [accessibility]);*/
+  }, [accessibility]);
 
   return acc;
+}
+
+function toggleFocus(component, inFocus) {
+  const acc = component.__hooks.accessibility;
+  if (acc && acc.setter) {
+    acc.setter({ focus: inFocus });
+  }
 }

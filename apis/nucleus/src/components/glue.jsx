@@ -26,6 +26,8 @@ export default function glue({ halo, element, model, initialSnOptions, onMount, 
   model.on('closed', unmount);
 
   root.add(portal);
+  // model.id is not unique
+  root.addCell(model.id, cellRef);
 
   return [unmount, cellRef];
 }

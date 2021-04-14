@@ -155,6 +155,7 @@ const ActionsToolbar = ({
     <Popover
       disableEnforceFocus
       disableAutoFocus
+      disableRestoreFocus
       open={popover.show}
       anchorEl={popover.anchorEl}
       anchorOrigin={popoverAnchorOrigin}
